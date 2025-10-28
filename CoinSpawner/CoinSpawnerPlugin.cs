@@ -130,17 +130,29 @@ namespace CoinSpawner
 
     public void OnFillingLocker(FillingLockerEventArgs ev)
     {
-      // Optional: only spawn coins in certain lockers
-      // if (ev.Locker.Type != LockerType.Scientist) return;
+      if (ev.Locker == null)
+        return;
 
       if (rng.NextDouble() > config.CoinSpawnChancePerLocker)
         return;
 
+      Vector3 spawnPos;
+
+      try
+      {
+        spawnPos = ev.Locker.RandomChamberPosition; // may throw
+      }
+      catch (NullReferenceException)
+      {
+        // Skip this locker if it can't provide a position
+        if (config.Debug)
+          Exiled.API.Features.Log.Warn($"Skipping locker in room: {ev.Locker.Room.Name} because RandomChamberPosition threw null.");
+        return;
+      }
+
       try
       {
         ev.IsAllowed = true; // don't cancel default item spawn
-        //ev.Locker.Position  + new Vector3(0f, 0.5f, 0f)
-        Vector3 spawnPos = ev.Locker.RandomChamberPosition;
         Pickup coin = Pickup.CreateAndSpawn(ItemType.Coin, spawnPos, Quaternion.identity);
 
         if (coin != null)
@@ -156,6 +168,8 @@ namespace CoinSpawner
         Exiled.API.Features.Log.Error($"Failed to spawn coin in locker: {ex}");
       }
     }
+
+
 
 
 
