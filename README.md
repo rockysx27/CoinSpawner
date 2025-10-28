@@ -19,6 +19,12 @@ A lightweight **SCP:SL EXILED plugin** that randomly spawns **coins** around the
 
 Example config file:
 
+---
+
+## ✨ FUTURE UPDATE WILL INCLUDE:
+
+- 💰 Randomly spawns coins across rooms every round but on a specified `GameObject` that include one of the strings from a list. So, coins spawns on desks and etc...
+
 ```yml
 # Maximum number of coins to spawn per round
 MaxCoinsPerRound: 10
