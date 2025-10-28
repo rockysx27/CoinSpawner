@@ -17,7 +17,8 @@ A lightweight **SCP:SL EXILED plugin** that randomly spawns **coins** around the
 
 ## ✨ FUTURE UPDATE WILL INCLUDE:
 
-- 💰 Randomly spawns coins across rooms every round but on a specified `GameObject` that include one of the strings from a list. So, coins spawns on desks and etc...
+- 💰 Will randomly spawn coins across the facility every round, however, they will only spawn on specified `GameObject`s. A list of string names of the game-objects will be used to derive which game-object should have a chance for a coin to spawn on it.
+This change is needed so that coins don't spawn on the floor.
 
 ---
 
